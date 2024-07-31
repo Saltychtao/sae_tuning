@@ -1,0 +1,13 @@
+accelerate launch --config_file configs/deepspeed/multi_gpu.yaml src/trl/dpo.py \
+    --dataset_name=trl-internal-testing/hh-rlhf-helpful-base-trl-style \
+    --model_name_or_path=/home/lijh/sae_tuning/sft_anthropic_hh/checkpoint-2000 \
+    --per_device_train_batch_size 4 \
+    --learning_rate 5e-5 \
+    --gradient_accumulation_steps 4 \
+    --logging_steps 10 \
+    --eval_steps 500 \
+    --output_dir="dpo_anthropic_hh" \
+    --warmup_steps 150 \
+    --report_to wandb \
+    --logging_first_step \
+    --no_remove_unused_columns --generate_during_eval True
